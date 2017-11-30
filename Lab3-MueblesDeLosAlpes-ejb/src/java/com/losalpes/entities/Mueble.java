@@ -62,6 +62,8 @@ public class Mueble
      * Indica si el mueble fue seleccionado
      */
     private boolean seleccion;
+    
+    private Promocion promocion;
 
     //-----------------------------------------------------------
     // Constructores
@@ -260,5 +262,11 @@ public class Mueble
     {
         cantidad--;
     } 
+    public Promocion getPromocion() {
+        return promocion;
+    }
 
+    public void setPromocion(Promocion promocion) {
+        this.promocion = promocion;
+    }
 }

@@ -13,6 +13,7 @@
 package com.losalpes.beans;
 
 import com.losalpes.entities.Mueble;
+import com.losalpes.entities.Promocion;
 import com.losalpes.entities.TipoMueble;
 import com.losalpes.servicios.IServicioCatalogoMockLocal;
 import java.io.Serializable;
@@ -36,10 +37,25 @@ public class CatalogoBean implements Serializable
     //-----------------------------------------------------------
 
     /**
+     * Representa un mueble selecionado para promocion
+     */
+    private long idMuebleSelec;
+    
+    /**
+     * 
+     */
+    private Promocion promocion;
+    
+    
+    /**
      * Representa un nuevo mueble a ingresar
      */
     private Mueble mueble;
 
+    /**
+     * Representa un nuevo mueble a ingresar
+     */
+    private Mueble muebleSelec;
     /**
      * Relación con la interfaz que provee los servicios necesarios del catálogo.
      */
@@ -56,6 +72,7 @@ public class CatalogoBean implements Serializable
     public CatalogoBean()
     {
         mueble=new Mueble();
+        muebleSelec=new Mueble();
     }
 
     //-----------------------------------------------------------
@@ -138,5 +155,61 @@ public class CatalogoBean implements Serializable
     public void limpiar()
     {
         mueble=new Mueble();
+    }
+    
+    /**
+     * Crea una nueva promocion
+     * @param evento
+     * @return 
+     */
+    public String crearPromocion(ActionEvent evento)
+    {
+        FacesContext context = FacesContext.getCurrentInstance();
+        Map map = context.getExternalContext().getRequestParameterMap();
+        idMuebleSelec = Long.parseLong((String) map.get("muebleId"));
+        promocion = new Promocion();
+        
+        return "promocion";
+    }
+    
+    /**
+     * registr la nueva promocion
+     * @return 
+     */
+    public String guardarPromocion() {
+        catalogo.agregarPromocionMueble(promocion, idMuebleSelec);
+        return "catalogo";
+    }
+
+    public Mueble getMuebleSelec() {
+        return muebleSelec;
+    }
+
+    public void setMuebleSelec(Mueble muebleSelec) {
+        this.muebleSelec = muebleSelec;
+    }
+
+    public long getIdMuebleSelec() {
+        return idMuebleSelec;
+    }
+
+    public void setIdMuebleSelec(long idMuebleSelec) {
+        this.idMuebleSelec = idMuebleSelec;
+    }
+
+    public Promocion getPromocion() {
+        return promocion;
+    }
+
+    public void setPromocion(Promocion promocion) {
+        this.promocion = promocion;
+    }
+
+    public IServicioCatalogoMockLocal getCatalogo() {
+        return catalogo;
+    }
+
+    public void setCatalogo(IServicioCatalogoMockLocal catalogo) {
+        this.catalogo = catalogo;
     }
 }

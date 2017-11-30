@@ -13,6 +13,7 @@
 package com.losalpes.servicios;
 
 import com.losalpes.entities.Mueble;
+import com.losalpes.entities.Promocion;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -48,5 +49,12 @@ public interface IServicioCatalogoMockRemote
      * @param id Identificador único del mueble
      */
     public void removerEjemplarMueble(long id);
+    
+    /**
+     * crea una promocion para un mueble seleccionado
+     * @param promocion
+     * @param idMueble 
+     */
+    public void agregarPromocionMueble(Promocion promocion, long idMueble);
     
 }
