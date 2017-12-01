@@ -30,7 +30,7 @@
                                    size="20"
                                    maxlength="20"
                                    label="Referencia"
-                                   value="#{promocionBean.muebleSelec.promocion.descripcion}"
+                                   value="#{promocionBean.promocion.descripcion}"
                                    required="true"
                                    >
                         <f:validateLength minimum="1"/>
@@ -41,29 +41,17 @@
                 <h:panelGrid width="100px" columns="1" columnClasses="pnlGrdClass, pnlGrdClass, pnlGrdClassLong">
                     <h:outputLabel for="TxtNombre"
                                      value="Fecha Inicio" />
-                    <h:inputText id="TxtNombre"
-                                   maxlength="20"
-                                   size="20"
-                                   value="#{promocionBean.muebleSelec.promocion.fechaIni}"
-                                   label="Nombre"
-                                   required="true">
-                        <f:validateLength minimum="1"/>
-                    </h:inputText>
-                    <h:message id="pwMsg" for="TxtNombre" />
+                    <p:calendar id="dateFechaIni"                                   
+                                   value="#{promocionBean.promocion.fechaIni}"
+                                  />
                 </h:panelGrid>
                 
                 <h:panelGrid width="100px" columns="1" columnClasses="pnlGrdClass, pnlGrdClass, pnlGrdClassLong">
                     <h:outputLabel for="TxtPrecio"
                                      value="Fecha Fin" />
-                    <h:inputText id="TxtPrecio"
-                                   maxlength="20"
-                                   size="20"
-                                   value="#{promocionBean.muebleSelec.promocion.fechaFin}"
-                                   label="Precio"
-                                   required="true">
-                        <f:validateLength minimum="1"/>
-                    </h:inputText>
-                    <h:message id="precioMsg" for="TxtPrecio" />
+                    <p:calendar id="dateFechaFin"
+                                   value="#{promocionBean.promocion.fechaFin}"
+                                   />
                 </h:panelGrid>
                 
                

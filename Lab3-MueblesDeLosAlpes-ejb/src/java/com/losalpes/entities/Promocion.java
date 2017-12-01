@@ -52,11 +52,10 @@ public class Promocion {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
-    
-    
 
-   
-    
-    
+    @Override
+    public String toString() {
+        return "Promocion{" + "descripcion=" + descripcion + ", fechaIni=" + fechaIni + ", fechaFin=" + fechaFin + '}';
+    }   
     
 }

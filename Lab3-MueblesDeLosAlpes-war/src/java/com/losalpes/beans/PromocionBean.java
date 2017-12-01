@@ -9,11 +9,13 @@ import com.losalpes.entities.Mueble;
 import com.losalpes.entities.Promocion;
 import com.losalpes.servicios.IServicioCatalogoMockLocal;
 import java.io.Serializable;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -39,16 +41,23 @@ public class PromocionBean implements Serializable {
 
     public PromocionBean() {
         muebleSelec = new Mueble();
+        promocion = new Promocion();
     }   
     
     @PostConstruct
     public void init() {
         muebleSelec = new Mueble();
+        promocion = new Promocion();
     }
     
     public String guardarPromocion() {
-        System.out.println("ISM al intentar guardar la promocion" + muebleSelec);        
-        catalogo.agregarPromocionMueble(promocion, Long.parseLong((String) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("muebleId")));
+        System.out.println("ISM al intentar guardar la promocion: " + promocion);        
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+        System.out.println("context: "+sessionMap.get("muebleId"));
+        Long idMueble = (Long) sessionMap.get("muebleId");
+        System.out.println("ISM al intentar guardar la promocion id: " + idMueble);
+        catalogo.agregarPromocionMueble(promocion, idMueble);
         return "catalogo";
     }
 
@@ -67,14 +76,5 @@ public class PromocionBean implements Serializable {
     public void setMuebleSelec(Mueble muebleSelec) {
         this.muebleSelec = muebleSelec;
     }
-
-    public IServicioCatalogoMockLocal getCatalogo() {
-        return catalogo;
-    }
-
-    public void setCatalogo(IServicioCatalogoMockLocal catalogo) {
-        this.catalogo = catalogo;
-    }
-    
     
 }

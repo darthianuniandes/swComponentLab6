@@ -26,6 +26,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
@@ -171,11 +172,13 @@ public class CatalogoBean implements Serializable
 //        FacesContext context = FacesContext.getCurrentInstance();
 //        Map map = context.getExternalContext().getRequestParameterMap();
 //        map.put("muebleId", mueble.getReferencia());
-
-        FacesContext.getCurrentInstance()
-            .getExternalContext()
-            .getRequestMap()
-            .put("muebleId", mueble.getReferencia());
+        System.out.println("ISM al crear la promocion2 "+ mueble.getReferencia());
+//        FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put();
+        
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Map<String, Object> sessionMap = externalContext.getSessionMap();
+        sessionMap.put("muebleId", mueble.getReferencia());
+//        System.out.println("promocion3: "+sessionMap.get("muebleId"));
         
         return "promocion";
     }
