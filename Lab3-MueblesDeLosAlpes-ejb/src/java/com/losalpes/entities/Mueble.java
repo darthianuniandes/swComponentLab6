@@ -63,6 +63,9 @@ public class Mueble
      */
     private boolean seleccion;
     
+    /**
+     * Primocion relacionada con el mueble
+     */
     private Promocion promocion;
 
     //-----------------------------------------------------------
@@ -269,4 +272,10 @@ public class Mueble
     public void setPromocion(Promocion promocion) {
         this.promocion = promocion;
     }
+
+    @Override
+    public String toString() {
+        return "Mueble{" + "referencia=" + referencia + ", nombre=" + nombre + ", descripcion=" + descripcion + ", tipo=" + tipo + ", precio=" + precio + ", imagen=" + imagen + ", cantidad=" + cantidad + ", seleccion=" + seleccion + ", promocion=" + promocion + '}';
+    }
+    
 }

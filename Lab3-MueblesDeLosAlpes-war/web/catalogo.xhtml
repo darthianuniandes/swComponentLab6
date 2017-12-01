@@ -146,11 +146,7 @@
                          </h:commandLink>     
                     </p:column>
                     <p:column headerText="Promocion">
-                        <p:commandButton action="#{catalogoBean.crearPromocion}" value="Crear Promocion">
-                            <f:param name="muebleId" value="#{file.referencia}" />
-                        </p:commandButton>
-                        
-                         
+                        <p:commandButton value="Crear Promocion" action="#{catalogoBean.crearPromocion(file)}" />
                     </p:column>
                 </p:dataTable>
 

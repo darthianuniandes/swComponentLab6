@@ -16,10 +16,16 @@ import com.losalpes.entities.Mueble;
 import com.losalpes.entities.Promocion;
 import com.losalpes.entities.TipoMueble;
 import com.losalpes.servicios.IServicioCatalogoMockLocal;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
@@ -29,6 +35,8 @@ import javax.faces.model.SelectItem;
  * Managed bean encargado del catálogo de muebles en el sistema
  * 
  */
+@SessionScoped
+@ManagedBean(name="catalogoBean")
 public class CatalogoBean implements Serializable
 {
 
@@ -42,20 +50,11 @@ public class CatalogoBean implements Serializable
     private long idMuebleSelec;
     
     /**
-     * 
-     */
-    private Promocion promocion;
-    
-    
-    /**
      * Representa un nuevo mueble a ingresar
      */
     private Mueble mueble;
 
-    /**
-     * Representa un nuevo mueble a ingresar
-     */
-    private Mueble muebleSelec;
+    
     /**
      * Relación con la interfaz que provee los servicios necesarios del catálogo.
      */
@@ -69,11 +68,16 @@ public class CatalogoBean implements Serializable
     /**
      * Constructor de la clase principal
      */
+    
     public CatalogoBean()
     {
         mueble=new Mueble();
-        muebleSelec=new Mueble();
     }
+    
+//    @PostConstruct
+//    public void init() {
+//        mueble=new Mueble();
+//    }
 
     //-----------------------------------------------------------
     // Getters y setters
@@ -159,35 +163,29 @@ public class CatalogoBean implements Serializable
     
     /**
      * Crea una nueva promocion
-     * @param evento
+     * @param mueble
      * @return 
      */
-    public String crearPromocion(ActionEvent evento)
-    {
-        FacesContext context = FacesContext.getCurrentInstance();
-        Map map = context.getExternalContext().getRequestParameterMap();
-        idMuebleSelec = Long.parseLong((String) map.get("muebleId"));
-        promocion = new Promocion();
+    public String crearPromocion(Mueble mueble) throws IOException {
+        System.out.println("ISM al crear la promocion "+mueble);
+//        FacesContext context = FacesContext.getCurrentInstance();
+//        Map map = context.getExternalContext().getRequestParameterMap();
+//        map.put("muebleId", mueble.getReferencia());
+
+        FacesContext.getCurrentInstance()
+            .getExternalContext()
+            .getRequestMap()
+            .put("muebleId", mueble.getReferencia());
         
         return "promocion";
     }
     
     /**
      * registr la nueva promocion
+     * @param muebleSel
      * @return 
      */
-    public String guardarPromocion() {
-        catalogo.agregarPromocionMueble(promocion, idMuebleSelec);
-        return "catalogo";
-    }
-
-    public Mueble getMuebleSelec() {
-        return muebleSelec;
-    }
-
-    public void setMuebleSelec(Mueble muebleSelec) {
-        this.muebleSelec = muebleSelec;
-    }
+    
 
     public long getIdMuebleSelec() {
         return idMuebleSelec;
@@ -195,14 +193,6 @@ public class CatalogoBean implements Serializable
 
     public void setIdMuebleSelec(long idMuebleSelec) {
         this.idMuebleSelec = idMuebleSelec;
-    }
-
-    public Promocion getPromocion() {
-        return promocion;
-    }
-
-    public void setPromocion(Promocion promocion) {
-        this.promocion = promocion;
     }
 
     public IServicioCatalogoMockLocal getCatalogo() {

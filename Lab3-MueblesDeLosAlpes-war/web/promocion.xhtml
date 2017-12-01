@@ -30,7 +30,7 @@
                                    size="20"
                                    maxlength="20"
                                    label="Referencia"
-                                   value="#{catalogoBean.muebleSelec.promocion.descripcion}"
+                                   value="#{promocionBean.muebleSelec.promocion.descripcion}"
                                    required="true"
                                    >
                         <f:validateLength minimum="1"/>
@@ -44,7 +44,7 @@
                     <h:inputText id="TxtNombre"
                                    maxlength="20"
                                    size="20"
-                                   value="#{catalogoBean.muebleSelec.promocion.fechaIni}"
+                                   value="#{promocionBean.muebleSelec.promocion.fechaIni}"
                                    label="Nombre"
                                    required="true">
                         <f:validateLength minimum="1"/>
@@ -58,7 +58,7 @@
                     <h:inputText id="TxtPrecio"
                                    maxlength="20"
                                    size="20"
-                                   value="#{catalogoBean.muebleSelec.promocion.fechaFin}"
+                                   value="#{promocionBean.muebleSelec.promocion.fechaFin}"
                                    label="Precio"
                                    required="true">
                         <f:validateLength minimum="1"/>
@@ -67,7 +67,7 @@
                 </h:panelGrid>
                 
                
-                <h:commandButton value="Crear" action="#{catalogoBean.guardarPromocion}" />
+                <h:commandButton value="Crear" action="#{promocionBean.guardarPromocion()}" />
                 
             </h:panelGroup>
             

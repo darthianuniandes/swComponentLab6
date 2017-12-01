@@ -28,8 +28,6 @@ public class Promocion {
         this.fechaIni = fechaIni;
         this.fechaFin = fechaFin;
     }
-    
-    
 
     public String getDescripcion() {
         return descripcion;
@@ -54,6 +52,10 @@ public class Promocion {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
+    
+    
+
+   
     
     
     
